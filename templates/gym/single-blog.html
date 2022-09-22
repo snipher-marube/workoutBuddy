@@ -1,0 +1,342 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Single Blog {% endblock %}
+{% block content %}
+     <!-- bradcam_area -->
+     <div class="bradcam_area">
+             <div class="single_bradcam  d-flex align-items-center bradcam_bg_2 overlay" style="max-height: 400px;">
+                     <div class="container">
+                         <div class="row align-items-center justify-content-center">
+                             <div class="col-xl-12">
+                                 <div class="bradcam_text text-center">
+                                     <h3>single blog</h3>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+     </div>
+     <!-- bradcam_area end -->
+
+   <!--================Blog Area =================-->
+   <section class="blog_area single-post-area section-padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 posts-list">
+               <div class="single-post">
+                  <div class="feature-img">
+                     <img class="img-fluid" src="{{ blog.thumbnail.url }}" alt="">
+                  </div>
+                  <div class="blog_details">
+                     <h2>{{ blog.title }}</h2>
+                     <ul class="blog-info-link mt-3 mb-4">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-user"></i> Travel, Coding
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#comment-form">
+                                <i class="fa fa-comments"></i> {{ blog.comment_set.all.count }} Comments
+                            </a>
+                        </li>
+                     </ul>
+                     <p class="excert">{{ blog.intro }}</p>
+
+                     <div class="quote-wrapper">
+                        <div class="quotes">{{ blog.quote }}</div>
+                     </div>
+                     <p>{{ blog.description|safe }}</p>
+
+                  </div>
+               </div>
+               <div class="navigation-top">
+                  <div class="d-sm-flex justify-content-between text-center">
+                     <p class="like-info">
+                         <span class="align-middle"><i class="fa fa-heart"></i>
+                         </span> Lily and 4
+                        people like this</p>
+                     <div class="col-sm-4 text-center my-2 my-sm-0">
+                        <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
+                     </div>
+                     <ul class="social-icons">
+                         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                     </ul>
+                  </div>
+                  <div class="navigation-area">
+                     <div class="row">
+                        <div
+                           class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                           <div class="thumb">
+                              <a href="#">
+                                 <img class="img-fluid" src="{% static 'images/img/post/preview.png' %}" alt="">
+                              </a>
+                           </div>
+                           <div class="arrow">
+                              <a href="#">
+                                 <span class="lnr text-white ti-arrow-left"></span>
+                              </a>
+                           </div>
+                           <div class="detials">
+                              <p>Prev Post</p>
+                              <a href="#">
+                                 <h4>Space The Final Frontier</h4>
+                              </a>
+                           </div>
+                        </div>
+                        <div
+                           class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                           <div class="detials">
+                              <p>Next Post</p>
+                              <a href="#">
+                                 <h4>Telescopes 101</h4>
+                              </a>
+                           </div>
+                           <div class="arrow">
+                              <a href="#">
+                                 <span class="lnr text-white ti-arrow-right"></span>
+                              </a>
+                           </div>
+                           <div class="thumb">
+                              <a href="#">
+                                 <img class="img-fluid" src="{% static 'images/img/post/next.png' %}" alt="">
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="blog-author">
+                  <div class="media align-items-center">
+                     <img src="{% static 'images/img/blog/author.png' %}" alt="">
+                     <div class="media-body">
+                        <a href="#">
+                           <h4>Snipher Marube</h4>
+                        </a>
+                        <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
+                           our dominion twon Second divided from</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="comments-area">
+                  <h4>{{ blog.comment_set.all.count }} comments</h4>
+
+                   {% for comment in blog.comment_set.all %}
+                       <div class="comment-list">
+                           <div class="single-comment justify-content-between d-flex">
+                               <div class="user justify-content-between d-flex">
+                                   <div class="thumb">
+                                       <img src="{{ comment.author.profile_pic.url }}" alt="">
+                                   </div>
+                                   <div class="desc">
+                                       <p class="comment">{{ comment.content }}</p>
+                                       <div class="d-flex justify-content-between">
+                                           <div class="d-flex align-items-center">
+                                               <h5>
+                                                   <a href="#">{{ comment.author }}</a>
+                                               </h5>
+                                               <p class="date">{{ comment.date_added|timesince }} ago |
+                                                   {% if comment.children.count > 0 %}
+                                                       {{ comment.children.count }} comment
+                                                       {% if comment.children.count > 1 %}s {% endif %}
+                                                   {% endif %}
+                                               </p>
+                                           </div>
+
+
+
+                                           <a id="toggle" href="#" class="btn-reply text-uppercase">reply</a>
+                                           <div class="reply-btn hidden">
+
+                                               <div id="comment-replies">
+
+                                                   {% for reply in comment.children %}
+                                                   <div class="comment-list">
+                                                       <div class="single-comment justify-content-between d-flex">
+                                                           <div class="user justify-content-between d-flex">
+                                                               <div class="thumb">
+                                                                   <img src="{{ reply.author.profile_pic.url }}" alt="">
+                                                               </div>
+                                                               <div class="desc">
+                                                                   <p class="comment">{{ reply.content }}</p>
+                                                                   <div class="d-flex align-items-center">
+                                                                       <h5>
+                                                                           <a href="#">{{ reply.author }}</a>
+                                                                       </h5>
+                                                                       <p class="date">{{ reply.date_added|timesince }} ago</p>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                                   {% endfor %}
+
+
+                                                   <form method="POST" class="form-contact" action="#" id="commentForm">
+                                                       {% csrf_token %}
+                                                       <input type="hidden" name="reply_id" value="{{ comment.id }}">
+                                                       <div class="row">
+                                                           <div class="col-12">
+                                                               <div class="form-group">
+                                                               <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="6"
+                                                                         placeholder="Write Comment"></textarea>
+                                                               </div>
+
+                                                           </div>
+
+                                                       </div>
+                                                       <div class="form-group">
+                                                           <button type="submit" class="button button-contactForm btn_1 boxed-btn">Reply</button>
+                                                       </div>
+                                                   </form>
+                                               </div>
+
+                                           </div>
+
+
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   {% endfor %}
+               </div>
+               <div id="comment-form" class="comment-form">
+                  <h4>Leave a Reply</h4>
+                   {% if request.user.is_authenticated %}
+                  <form method="POST" class="form-contact comment_form" action="#" id="commentForm">
+                      {% csrf_token %}
+                     <div class="row">
+                        <div class="col-12">
+                           <div class="form-group">
+                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                 placeholder="Write Comment"></textarea>
+                           </div>
+                        </div>
+
+                     </div>
+                     <div class="form-group">
+                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">Submit Comment</button>
+                     </div>
+                  </form>
+                   {% endif %}
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="blog_right_sidebar">
+                  <aside class="single_sidebar_widget search_widget">
+                     <form action="#">
+                        <div class="form-group">
+                           <div class="input-group mb-3">
+                              <input type="text" class="form-control" placeholder='Search Keyword'
+                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                              <div class="input-group-append">
+                                 <button class="btn" type="button"><i class="ti-search"></i></button>
+                              </div>
+                           </div>
+                        </div>
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                           type="submit">Search</button>
+                     </form>
+                  </aside>
+                  <aside class="single_sidebar_widget post_category_widget">
+                     <h4 class="widget_title">Top Tweet</h4>
+                      <ul class="list cat-list">
+                          <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Full-Stack web development 💻<br><br>Front-end <br>→ HTML<br>→ CSS<br>→ Tailwind CSS<br>→ Javascript / TypeScript<br>→ React / Angular / Vue / NextJS<br><br>Back-end<br>→ Python / Java / Javascript<br><br>Database<br>→ MongoDB /MySQL / PostgreSQL<br><br>Cloud<br>→ AWS / Google cloud<br><br>UI/UX &amp; tools<br>→ Figma / Adobe XD</p>&mdash; Snipher Marube (@SnipherMarube) <a href="https://twitter.com/SnipherMarube/status/1553384435231375361?ref_src=twsrc%5Etfw">July 30, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                      </ul>
+                  </aside>
+                  <aside class="single_sidebar_widget popular_post_widget">
+                     <h3 class="widget_title">Recent Post</h3>
+                      {% for blog in recent_posts %}
+                          <div class="media post_item">
+                              <img style="height:auto; width:90px;" src="{{ blog.thumbnail.url }}" alt="post">
+                              <div class="media-body">
+                                  <a href="{% url 'single_blog' blog.slug %}">
+                                      <h3>{{ blog.title }}</h3>
+                                  </a>
+                                  <p>{{ blog.pub_date|date:'M d Y' }}</p>
+                              </div>
+                          </div>
+                      {% endfor %}
+                  </aside>
+
+
+                  <aside class="single_sidebar_widget tag_cloud_widget">
+                     <h4 class="widget_title">Tag Clouds</h4>
+                     <ul class="list">
+                         {% for tag in tags %}
+                             <li>
+                                 <a href="#">#{{ tag }}</a>
+                             </li>
+                         {% endfor %}
+
+                     </ul>
+                  </aside>
+                  <aside class="single_sidebar_widget instagram_feeds">
+                     <h4 class="widget_title">Instagram Feeds</h4>
+                     <ul class="instagram_row flex-wrap">
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="{% static 'images/img/post/post_5.png' %}" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="{% static 'images/img/post/post_6.png' %}" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="{% static 'images/img/post/post_7.png' %}" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="{% static 'images/img/post/post_8.png' %}" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="{% static 'images/img/post/post_9.png' %}" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="{% static 'images/img/post/post_10.png' %}" alt="">
+                           </a>
+                        </li>
+                     </ul>
+                  </aside>
+                  <aside class="single_sidebar_widget newsletter_widget">
+                     <h4 class="widget_title">Newsletter</h4>
+                     <form action="#">
+                        <div class="form-group">
+                           <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                              onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                        </div>
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                           type="submit">Subscribe</button>
+                     </form>
+                  </aside>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!--================ Blog Area end =================-->
+
+    <script>
+        document.getElementById("toggle").addEventListener("click", function(event){
+            event.preventDefault()
+        });
+        $(document).ready(function () {
+            $("#toggle").click(function (event) {
+                $("div").toggleClass("hidden unhidden");
+            });
+        });
+    </script>
+
+{% endblock %}
+
