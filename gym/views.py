@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from .models import Tag, Category, Blog, Comment, Profile
+from .models import Tag, Category, Blog, Comment
 
 
 def home(request):
