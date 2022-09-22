@@ -8,7 +8,7 @@
 
 --> Clone the repository using the command below :
 ```bash
-https://github.com/snipher-marube/CarZone-dealership.git
+git clone https://github.com/snipher-marube/workoutBuddy.git
 
 ```
 
