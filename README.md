@@ -65,8 +65,8 @@ python manage.py runserver
 <h2>Completed Features</h2>
   <p> 1. Blog Posts </p>
   <p> 2. Post comment </p>
-  3. <p> post comment reply </p>
-  4. <p> post twitter share </p>
+  <p> 3. post comment reply </p>
+  <p> 4. post twitter share </p>
   
 
 
