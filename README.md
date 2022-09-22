@@ -63,10 +63,10 @@ python manage.py runserver
 ### App Preview :
 
 <h2>Completed Features</h2>
-  1. Blog Posts
-  2. Post comment
-  3. post comment reply
-  4. post twitter share
+  <p> 1. Blog Posts </p>
+  <p> 2. Post comment </p>
+  3. <p> post comment reply </p>
+  4. <p> post twitter share </p>
   
 
 
